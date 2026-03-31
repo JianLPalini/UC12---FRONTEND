@@ -3,9 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário</title>
+    <title>Formulario</title>
 </head>
 <body>
+    <!--  tag para formularios  -->
+    <form action="">
+    <h2>Formulaário de cadastro</h2>
+    <label for="Nome">Nome</label> <!-- dá um titulo para o campo abaixo-->
+    <input type="text" name="Nome" id=""> <!-- input é o campo onde vamos escrever algo-->
+
+    <label for="Email">Email</label>
+    <input type="email" name="Email" id="">
+
+    <label for="senha"> Senha</label>
+    <input type="password" name="senha">
+
+    <label for="escolhas"> o que você sabe?</label>
+    <input type="checkbox" name="escolhas" value="js" id="">JS
+    <input type="checkbox" name="escolhas" value="html" id="">HTML
+    <input type="checkbox" name="escolhas" value="css" id="">CSS
     
+    <label for="sexo"> Sexo</label>
+    <input type="radio" name="sexo" value="Masculino" id="">Masculino
+    <input type="radio" name="sexo" value="Feminino" id="">Feminino
+    <input type="radio" name="sexo" value="Indefinido" id="">Indefinido
+    <input type="radio" name="sexo" value="Não-informado" id="">Prefiro não informar
+
+    <!-- Select (Lista suspensa) -->
+     <label for="curso"> Curso desejado </label><br>
+     <select name="curso" id="">
+        <option value = "html">HTML</option>
+        <option value = "html">Javascript</option>
+        <option value = "html">CSS</option>
+     </select>
+
+     <label for="mensagem">mensagem</label>
+     <textarea name="mensagem" id="" cols="20" rows="4"></textarea>
+
+     <label for="nascimento"> Data de Nascimento </label>
+     <input type="date" name="nascimento" id="">
+
+     <button type="submit">Enviar</button>
+
+    </form>
 </body>
 </html>
