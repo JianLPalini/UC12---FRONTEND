@@ -1,0 +1,16 @@
+.card {
+    width: 300px;
+    padding: 20px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+}
+.card button {
+    display: inline-block;
+    width: 120px;
+    background: blue;
+    color: white;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+} 

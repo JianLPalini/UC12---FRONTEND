@@ -1,0 +1,18 @@
+.ex6-block {
+    width: 150px;
+    height: 80px;
+    background: gray;
+    display: block;
+}
+.ex6-inline {
+    width: 150px;
+    height: 80px;
+    background: gray;
+    display: inline;
+}
+.ex6-inline-block {
+    width: 150px;
+    height: 80px;
+    background: gray;
+    display: inline-block;
+}

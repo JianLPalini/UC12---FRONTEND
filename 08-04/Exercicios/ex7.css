@@ -1,0 +1,14 @@
+.ex7-normal {
+    background: orange;
+    padding: 10px;
+}
+.ex7-none {
+    background: orange;
+    padding: 10px;
+    display: none;
+}
+.ex7-hidden {
+    background: orange;
+    padding: 10px;
+    visibility: hidden;
+}

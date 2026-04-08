@@ -1,0 +1,8 @@
+.corrigido a {
+    display: inline-block;
+    width: 200px;
+    background: gray;
+    text-align: center;
+    padding: 10px 0;
+    margin: 5px;
+}
