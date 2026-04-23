@@ -1,153 +1,120 @@
-// Dados do quiz (perguntas e respostas)
 const perguntas = [
     {
         texto: "Qual é o nome da espada usada pelos caçadores de demônios?",
-        respostaCorreta: "Nichirin Blade"
+        respostas: ["Katana comum", "Nichirin Blade", "Wakizashi", "Arco e flecha", "Machado de batalha"],
+        correta: "Nichirin Blade"
     },
     {
         texto: "Qual é o nome da primeira respiração que Tanjiro Kamado aprendeu?",
-        respostaCorreta: "Respiração da Água"
+        respostas: ["Respiração do Sol", "Respiração da Água", "Respiração do Vento", "Respiração da Lua", "Respiração do Trovão"],
+        correta: "Respiração da Água"
+    },
+    {
+    texto: "Qual é o nome da irmã de Tanjiro que se transforma em demônio?",
+    respostas: ["Shinobu Kocho", "Kanao Tsuyuri", "Nezuko Kamado", "Mitsuri Kanroji", "Aoi Kanzaki"],
+    correta: "Nezuko Kamado"
+    },
+    {
+    texto: "Qual Hashira utiliza a Respiração do Fogo?",
+    respostas: ["Giyu Tomioka", "Sanemi Shinazugawa", "Kyojuro Rengoku", "Obanai Iguro", "Gyomei Himejima"],
+    correta: "Kyojuro Rengoku"
+    },
+    {
+    texto: "Qual é o nome do principal vilão de Demon Slayer?",
+    respostas: ["Kokushibo", "Akaza", "Muzan Kibutsuji", "Douma", "Gyutaro"],
+    correta: "Muzan Kibutsuji"
     }
 ];
 
-let perguntaAtual = 0;      // qual pergunta está sendo exibida (0 ou 1)
-let quizFinalizado = false; // se o quiz já acabou
-let pontuacao = 0;          // pontuação do usuário
+let estado = {
+    perguntaAtual: 0,
+    pontuacao: 0,
+    podeResponder: true
+};
 
-// Elementos do DOM
-const perguntasEl = document.querySelectorAll(".pergunta");
-const botoesContainerEl = document.querySelectorAll(".botoes-resposta");
-const resultadoEl = document.getElementById("resultado");
-const reiniciarBtn = document.getElementById("reiniciar");
+const elementos = {
+    container: document.querySelector('.quiz-container'),
+    pergunta: document.querySelector('.pergunta'),
+    botoesContainer: document.querySelector('.botoes-resposta'),
+    resultado: document.querySelector('.resultado'),
+    reiniciarBtn: document.querySelector('.btn-reiniciar')
+};
 
-// Inicializa mostrando apenas a primeira pergunta
-function mostrarPergunta(index) {
-    // Esconde todas as perguntas e botões
-    perguntasEl.forEach((el, i) => {
-        if (i === index) {
-            el.classList.add("active");
-        } else {
-            el.classList.remove("active");
-        }
+function carregarPergunta() {
+    estado.podeResponder = true;
+    const pergunta = perguntas[estado.perguntaAtual];
+    
+    elementos.pergunta.textContent = pergunta.texto;
+    
+    elementos.botoesContainer.innerHTML = '';
+    pergunta.respostas.forEach(resposta => {
+        const botao = document.createElement('button');
+        botao.textContent = resposta;
+        botao.classList.add('btn-resposta');
+        botao.addEventListener('click', () => verificarResposta(resposta, botao));
+        elementos.botoesContainer.appendChild(botao);
     });
     
-    botoesContainerEl.forEach((el, i) => {
-        if (i === index) {
-            el.classList.add("active");
-        } else {
-            el.classList.remove("active");
-        }
-    });
+    elementos.resultado.innerHTML = `Pontuação: ${estado.pontuacao}/${perguntas.length}`;
+    elementos.resultado.style.color = "#ffb347";
 }
 
-// Desabilita todos os botões da pergunta atual
-function desabilitarBotoes() {
-    const botoesAtivos = document.querySelectorAll(".botoes-resposta.active .btn-resposta");
-    botoesAtivos.forEach(btn => {
-        btn.disabled = true;
-        btn.style.opacity = "0.6";
-        btn.style.cursor = "default";
-    });
-}
-
-// Verifica a resposta do usuário
-function verificarResposta(event) {
-    if (quizFinalizado) return;
+function verificarResposta(respostaSelecionada, botaoClicado) {
+    if (!estado.podeResponder) return;
     
-    const botaoClicado = event.currentTarget;
-    const respostaUsuario = botaoClicado.textContent.trim();
-    const respostaCorreta = perguntas[perguntaAtual].respostaCorreta;
+    const pergunta = perguntas[estado.perguntaAtual];
+    const todosBotoes = document.querySelectorAll('.btn-resposta');
+    const acertou = (respostaSelecionada === pergunta.correta);
     
-    // Impede responder a mesma pergunta duas vezes
-    const botoesAtivos = document.querySelectorAll(".botoes-resposta.active .btn-resposta");
-    const jaRespondeu = botoesAtivos[0].disabled === true;
-    if (jaRespondeu) return;
-    
-    // Verifica se acertou
-    if (respostaUsuario === respostaCorreta) {
-        pontuacao++;
-        resultadoEl.innerHTML = `✅ Correto! Você acertou! 🎉<br> Pontuação: ${pontuacao}/${perguntas.length}`;
-        resultadoEl.style.color = "#a5d6a5";
+    if (acertou) {
+        estado.pontuacao += 10;
+        elementos.resultado.innerHTML = ` Acertou Mizeravel! <br> Pontuação: ${estado.pontuacao}/${perguntas.length*10}`;
+        elementos.resultado.style.color = "#a5d6a5";
     } else {
-        resultadoEl.innerHTML = `❌ Errado! A resposta correta é: <strong>${respostaCorreta}</strong><br> Pontuação: ${pontuacao}/${perguntas.length}`;
-        resultadoEl.style.color = "#ffaaaa";
+        elementos.resultado.innerHTML = ` Errado! Seu burro. A resposta correta é: ${pergunta.correta}<br> Pontuação: ${estado.pontuacao}/${perguntas.length}`;
+        elementos.resultado.style.color = "#ffaaaa";
     }
     
-    // Destaca visualmente os botões
-    botoesAtivos.forEach(btn => {
-        const textoBtn = btn.textContent.trim();
-        if (textoBtn === respostaCorreta) {
+    todosBotoes.forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent === pergunta.correta) {
             btn.style.backgroundColor = "#2e7d32";
             btn.style.border = "2px solid gold";
-        } else if (btn === botaoClicado && textoBtn !== respostaCorreta) {
+        } else if (btn === botaoClicado && !acertou) {
             btn.style.backgroundColor = "#8b0000";
         }
     });
     
-    desabilitarBotoes();
+    estado.podeResponder = false;
     
-    // Avança para próxima pergunta ou finaliza o quiz
-    if (perguntaAtual + 1 < perguntas.length) {
-        // Tem próxima pergunta
-        setTimeout(() => {
-            perguntaAtual++;
-            mostrarPergunta(perguntaAtual);
-            resultadoEl.innerHTML = ""; // limpa resultado anterior
-            resultadoEl.style.color = "#ffb347";
-        }, 1500);
-    } else {
-        // Fim do quiz
-        quizFinalizado = true;
-        setTimeout(() => {
-            resultadoEl.innerHTML = `🏆 QUIZ FINALIZADO! 🏆<br> Você acertou ${pontuacao} de ${perguntas.length} perguntas!`;
-            resultadoEl.style.color = "#ffd966";
-            reiniciarBtn.style.display = "inline-block";
-        }, 500);
-    }
+    setTimeout(() => {
+        if (estado.perguntaAtual + 1 < perguntas.length) {
+            estado.perguntaAtual++;
+            carregarPergunta();
+        } else {
+            finalizarQuiz();
+        }
+    }, 1500);
 }
 
-// Adiciona eventos de clique aos botões
-function iniciarEventos() {
-    const todosBotoes = document.querySelectorAll(".btn-resposta");
-    todosBotoes.forEach(btn => {
-        btn.removeEventListener("click", verificarResposta);
-        btn.addEventListener("click", verificarResposta);
-    });
+function finalizarQuiz() {
+    elementos.resultado.innerHTML = ` QUIZ FINALIZADO COM SUCESSO! <br> Você fez ${estado.pontuacao} de ${perguntas.length} perguntas!`;
+    elementos.resultado.style.color = "#ffd966";
+    elementos.reiniciarBtn.style.display = "inline-block";
+    estado.podeResponder = false;
 }
 
-// Reinicia completamente o quiz
 function reiniciarQuiz() {
-    perguntaAtual = 0;
-    quizFinalizado = false;
-    pontuacao = 0;
+    estado = {
+        perguntaAtual: 0,
+        pontuacao: 0,
+        podeResponder: true
+    };
     
-    // Mostra primeira pergunta
-    mostrarPergunta(0);
-    
-    // Limpa resultado
-    resultadoEl.innerHTML = "";
-    resultadoEl.style.color = "#ffb347";
-    
-    // Reseta todos os botões
-    const todosBotoes = document.querySelectorAll(".btn-resposta");
-    todosBotoes.forEach(btn => {
-        btn.disabled = false;
-        btn.style.opacity = "1";
-        btn.style.backgroundColor = "#6b2e2e";
-        btn.style.border = "none";
-        btn.style.cursor = "pointer";
-    });
-    
-    // Esconde botão reiniciar
-    reiniciarBtn.style.display = "none";
-    
-    // Recria eventos
-    iniciarEventos();
+    elementos.reiniciarBtn.style.display = "none";
+    carregarPergunta();
 }
 
-// Configura evento do botão reiniciar
-reiniciarBtn.addEventListener("click", reiniciarQuiz);
+elementos.reiniciarBtn.addEventListener('click', reiniciarQuiz);
 
-// Inicia o quiz
-mostrarPergunta(0);
-iniciarEventos();
+carregarPergunta();
