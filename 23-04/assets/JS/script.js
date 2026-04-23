@@ -19,3 +19,21 @@ btn.addEventListener('click' , () =>{
 img.setAttribute('src', 'https://upload.wikimedia.org/wikipedia/pt/9/95/Charizard.png')
 img.setAttribute('alt', 'Charizard')
 })
+
+
+const imagens = [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmlHdAQdwHtiDpyPlIN16T6p5YLHV5fjdsMg&s",
+            "https://upload.wikimedia.org/wikipedia/pt/9/95/Charizard.png",
+
+        ];
+
+ let indice = 0;
+
+ botao.addEventListener("click", function() {
+            indice = indice + 1;
+            
+            if (indice >= imagens.length) {
+                indice = 0;  
+            }
+            imagem.src = imagens[indice];
+        });
