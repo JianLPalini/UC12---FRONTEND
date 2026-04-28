@@ -1,94 +1,56 @@
-let cartas = []
-let primeiraCarta = null
-let segundaCarta = null
-let bloqueioTabuleiro = false
-let pontuacaoAtual = 0
-let jogadasAtuais = 0
-let paresEncontrados = 0
-let tempoAtual = 0
-let timerInterval = null
-
-const emojis = [
-    "🐶", "🐱", "🐭", "🐹",
-    "🐰", "🦊", "🐻", "🐼",
-    "🐨", "🐸", "🐒", "🐔", 
-    "🦁", "🐙", "🦄", "🐉"
+const itens = [
+    "Anel", "Gandalf", "Legolas", "Aragorn", "Gollum", "Mordor" 
 ]
 
 
-const quantidadePares = 8
+const totalPares = itens.length;
 
+let carta1 = null
+let carta2 = null
+let bloqueado = false
+let pontos = 0
+let jogadas = 0
+let paresAcertados = 0 
+let tempo = 0         
+let timer = null         
 
 function criarCartas() {
-
     const tabuleiro = document.getElementById('tabuleiro');
+    tabuleiro.innerHTML = '';
+    
+    let cartas = [...itens, ...itens]
     
 
-    tabuleiro.innerHTML = ''
+    cartas = embaralhar(cartas)
     
-
-    const emojisSelecionados = emojis.slice(0, quantidadePares)
-    
-
-    let cartasEmbaralhadas = [...emojisSelecionados, ...emojisSelecionados]
-    
-
-    
-    cartasEmbaralhadas.forEach((emoji, index) => {
+    cartas.forEach((conteudo, index) => {
         const carta = document.createElement('div')
         carta.className = 'carta'
         carta.setAttribute('data-id', index)
-        carta.setAttribute('data-emoji', emoji)
+        carta.setAttribute('data-conteudo', conteudo)
         carta.setAttribute('data-encontrada', 'false')
-    
+        
+        carta.innerHTML = `
+            <div class="frente">${conteudo}</div>
+            <div class="verso">?</div>
+        `;
         
         carta.addEventListener('click', () => {
-            manipularClique(carta)
+            cliqueCarta(carta)
         });
         
         tabuleiro.appendChild(carta)
     });
 }
 
-function manipularClique(carta) {
-    console.log('Clicou na carta!')
+function embaralhar(array) {
+    return array.sort(() => Math.random() - 0.5)
 }
 
+function cliqueCarta(carta) {
+    console.log('Clicou na carta:', carta.getAttribute('data-conteudo'))
+}
 
 window.onload = () => {
     criarCartas()
-}
-
-function embaralhar(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1))
-        
-        [array[i], array[j]] = [array[j], array[i]]
-    }
-    return array
-}
-
-function criarCartas() {
-    const tabuleiro = document.getElementById('tabuleiro')
-    tabuleiro.innerHTML = ''
-    
-    const emojisSelecionados = emojis.slice(0, quantidadePares)
-    
-    let cartasEmbaralhadas = [...emojisSelecionados, ...emojisSelecionados]
-    cartasEmbaralhadas = embaralhar(cartasEmbaralhadas)
-    
-    cartasEmbaralhadas.forEach((emoji, index) => {
-        const carta = document.createElement('div')
-        carta.className = 'carta'
-        carta.setAttribute('data-id', index)
-        carta.setAttribute('data-emoji', emoji)
-        carta.setAttribute('data-encontrada', 'false')
-        
-        
-        carta.addEventListener('click', () => {
-            manipularClique(carta);
-        })
-        
-        tabuleiro.appendChild(carta);
-    })
-}
+};
