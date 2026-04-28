@@ -119,9 +119,112 @@ function cliqueCarta(carta) {
     }
 }
 
+function compararCartas(){
+    const conteudo1 = carta1.getAttribute('data-conteudo')
+    const conteudo2 = carta2.getAttribute('data-conteudo')
 
+    if (conteudo1 === conteudo2){
+        pontos++
+        paresAcertados++
+        document.getElementById('pontos').textContent = pontos
 
+        carta1.setAttribute('data-encontrada', 'true')
+        carta2.setAttribute('data-encontrada', 'true')
+        carta1.classLista.add('correta')
+        carta2.classList.add('correta')
 
-document 
-.getElementById('btnReiniciar')
-.addEventListener('click', btnReiniciarJogo)
+        limparSelecao()
+
+        if (paresAcertados === totalPares){
+            fimDeJogo()
+        }
+    } else{
+        pontos = Math.max(0, pontos -1)
+        document.getElementById('pontos').textContent = pontos
+
+        bloqueado = true
+        setTimeout(() => {
+            desvirarCarta(carta1)
+            desvirarCarta(carta2)
+            bloqueado = false
+            limparSelecao()
+        }, 1000)
+    }
+}
+
+function limparSelecao() {
+    carta1 = null
+    carta2 = null
+}
+
+function fimDeJogo() {
+    if(timer){
+        clearInterval(timer)
+    }
+    setTimeout(() =>{
+        alert('🏆 Você venceu! 🏆\n Pontos: ${pontos}\n Jogadas: ${jogadas}\n Tempo: ${tempo}s')
+    }, 100)
+}
+
+function cliqueCarta(carta){
+    if(bloqueado) return
+    if(carta.getAttribute('data-encontrada') === 'true') return
+    if(carta.classList.contains('virada')) return
+
+    if(carta1 === null){
+        carta1 = carta
+        virarCarta(carta2)
+
+        jogadas++
+        document.getElementById('jogadas').textContent = jogadas
+
+        compararCartas()
+    }
+}
+
+function iniciarTimer(){
+    if(timer) {
+        clearInterval(timer)
+    }
+
+    tempo = 0
+    document.getElementById('tempo').textContent = tempo
+
+    timer = setInterval(() => {
+        tempo++
+        document.getElementById('tempo').textContent = tempo
+    }, 1000)
+}
+
+window.onload = () => {
+    criarCartas()
+    iniciarTimer
+}
+
+function reiniciarJogo(){
+    if(timer){
+        clearInterval(timer)
+    }
+
+    carta1 = null
+    carta2 = null
+    bloqueado = false
+    pontos = 0
+    jogadas = 0
+    paresAcertados = 0
+
+    document.getElementById('pontos').textContent = pontos
+    document.getElementById('jogadas').textContent = jogadas
+
+    criarCartas()
+
+    iniciarTimer()
+}
+
+window.onload = () => {
+    criarCartas()
+    iniciarTimer
+
+    const btnReiniciar = document.getElementById('btnReiniciar')
+    btnReiniciar.addEventListener('click', reiniciarJogo)
+}
