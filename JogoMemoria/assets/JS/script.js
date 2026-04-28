@@ -118,3 +118,10 @@ function cliqueCarta(carta) {
         
     }
 }
+
+
+
+
+document 
+.getElementById('btnReiniciar')
+.addEventListener('click', btnReiniciarJogo)
