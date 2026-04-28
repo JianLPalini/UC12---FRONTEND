@@ -19,8 +19,8 @@ let tempo = 0
 let timer = null         
 
 function criarCartas() {
-    const tabuleiro = document.getElementById('tabuleiro');
-    tabuleiro.innerHTML = '';
+    const tabuleiro = document.getElementById('tabuleiro')
+    tabuleiro.innerHTML = ''
     
     let cartas = [...itens, ...itens]
     
@@ -65,7 +65,7 @@ function embaralhar(array) {
 }
 
 function criarCartas() {
-    const tabuleiro = document.getElementById('tabuleiro');
+    const tabuleiro = document.getElementById('tabuleiro')
     tabuleiro.innerHTML = ''
     
     let cartas = [...itens, ...itens]
@@ -74,22 +74,22 @@ function criarCartas() {
     
     cartas.forEach((conteudo, index) => {
         const carta = document.createElement('div')
-        carta.className = 'carta';
-        carta.setAttribute('data-id', index);
-        carta.setAttribute('data-conteudo', conteudo);
+        carta.className = 'carta'
+        carta.setAttribute('data-id', index)
+        carta.setAttribute('data-conteudo', conteudo)
         carta.setAttribute('data-encontrada', 'false')
         
         carta.innerHTML = `
             <div class="frente">${conteudo}</div>
-            <div class="verso">🧝</div>
-        `;
+            <div class="verso"></div>
+        `
         
         carta.addEventListener('click', () => {
             cliqueCarta(carta)
-        });
+        })
         
         tabuleiro.appendChild(carta)
-    });
+    })
 }
 
 function virarCarta(carta) {
