@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -78,7 +84,18 @@ h1 {
     transform: scale(1.05);
 }
 
-
+.frente, .verso {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    transition: transform 0.6s;
+}
 
 .frente {
     background: linear-gradient(135deg, #667eea, #764ba2);
@@ -90,11 +107,18 @@ h1 {
     transform: rotateY(0deg);
 }
 
+.carta.virada .frente {
+    transform: rotateY(0deg);
+}
+
+.carta.virada .verso {
+    transform: rotateY(-180deg);
+}
 
 .carta.correta {
     opacity: 0.7;
     cursor: default;
-    filter: drop-shadow(0 0 10px rgb(0, 0, 0));
+    filter: drop-shadow(0 0 10px gold);
 }
 
 .carta.correta .frente {
@@ -108,4 +132,17 @@ h1 {
 
 .carta.correta:hover {
     transform: none;
+}
+
+@media (max-width: 600px) {
+    .carta {
+        width: 70px;
+        height: 70px;
+        font-size: 35px;
+    }
+    
+    .card-info {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
 }
