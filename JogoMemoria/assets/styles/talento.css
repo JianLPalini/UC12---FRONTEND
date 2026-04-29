@@ -1,159 +1,278 @@
+/* RESET BÁSICO - tira as margens e espaços padrão */
+
+/* todo asterisco * significa "todos os elementos da página" */
+/* isso aqui é pra não ter espaçamentos estranhos que o navegador coloca sozinho */
 * {
     margin: 0;
+    /* tira a margem externa */
     padding: 0;
+    /* tira o espaçamento interno */
     box-sizing: border-box;
+    /* faz a largura contar incluindo bordas e padding */
 }
 
+/* ESTILO DO CORPO DA PÁGINA (body) */
+
+/* aqui é onde tudo vai dentro, é o fundo da página */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #2c1810, #4a2c1a);
+    /* tipo da letra */
+    background-image: url(https://i.pinimg.com/1200x/64/3f/89/643f89d33efa0a702eeb1529533eb52b.jpg);
+    /* fundo com imagem */
+     background-size: cover;     
+    /* estica imagem toda a tela */
+    background-repeat: no-repeat;
+    /* não repete a imagem */
     min-height: 100vh;
+    /* altura mínima = tela toda */
     display: flex;
+    /* usa flexbox para centralizar */
     justify-content: center;
+    /* centraliza na horizontal */
     align-items: center;
+    /* centraliza na vertical */
     padding: 20px;
+    /* espaçamento nas bordas */
 }
 
+/* ESTILO DO CONTAINER PRINCIPAL */
 .container {
-    max-width: 1200px;
+    max-width: 1300px;
     width: 100%;
-    background: #f5e6c8;
     border-radius: 20px;
     padding: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    border: 3px solid #c9a03d;
+    /* tirei o background, box-shadow e border */
 }
+
+/* ESTILO DO TÍTULO (h1) */
 
 h1 {
     text-align: center;
+    /* texto no centro */
     color: #2c1810;
+    /* cor marrom escuro */
     margin-bottom: 20px;
+    /* espaço embaixo do título */
     font-size: 28px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    /* tamanho da letra */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    /* sombra leve no texto */
 }
+
+/* ESTILO DO PAINEL DE ESTATÍSTICAS (pontos, jogadas, tempo) */
 
 .painel {
     display: flex;
+    /* usa flexbox pra organizar lado a lado */
     justify-content: space-around;
+    /* espalha com espaço igual entre eles */
     margin-bottom: 20px;
+    /* espaço embaixo */
     flex-wrap: wrap;
+    /* se apertar, quebra pra linha de baixo */
     gap: 15px;
+    /* espaço entre os itens */
+    
 }
+
+/* ESTILO DE CADA INFORMAÇÃO DO PAINEL */
 
 .info {
     background: #2c1810;
+    /* fundo marrom escuro */
     padding: 10px 20px;
+    /* espaço interno (em cima/baixo, esquerda/direita) */
     border-radius: 10px;
+    /* borda arredondada */
     font-size: 18px;
+    /* tamanho da letra */
     font-weight: bold;
+    /* letra em negrito */
     color: #c9a03d;
+    /* cor dourada */
     font-family: monospace;
+    /* letra estilo de máquina de escrever */
 }
+
+/* ESTILO DO BOTÃO REINICIAR */
 
 #btnReiniciar {
     display: block;
+    /* faz o botão ocupar a largura inteira disponível */
     margin: 0 auto 20px auto;
+    /* centraliza e coloca espaço embaixo */
     padding: 10px 30px;
+    /* espaço interno */
     font-size: 16px;
+    /* tamanho da letra */
     background: #8b4513;
+    /* fundo marrom (cor de terra) */
     color: #f5e6c8;
+    /* letra cor de pergaminho */
     border: none;
+    /* tira a borda padrão */
     border-radius: 25px;
+    /* borda bem arredondada (efeito pílula) */
     cursor: pointer;
+    /* o mouse vira uma mãozinha */
     transition: all 0.3s;
+    /* animação suave quando passar o mouse */
     font-weight: bold;
+    /* letra em negrito */
     font-family: monospace;
+    /* letra estilo máquina */
 }
+
+/* EFEITO DO BOTÃO QUANDO PASSA O MOUSE POR CIMA (hover) */
 
 #btnReiniciar:hover {
     background: #2c1810;
+    /* muda a cor do fundo */
     transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    /* aumenta um pouquinho (5% maior) */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    /* adiciona sombra */
 }
+
+/* ESTILO DO TABULEIRO (onde as cartas ficam) */
 
 .tabuleiro {
     display: flex;
+    /* usa flexbox */
     flex-wrap: wrap;
+    /* permite quebrar linha quando não couber */
     justify-content: center;
+    /* centraliza as cartas */
     gap: 15px;
+    /* espaço de 15px entre as cartas */
     perspective: 1000px;
+    /* dá profundidade pro efeito 3D de virar */
 }
+
+/* ESTILO DA CARTA (cada carta individual) */
 
 .carta {
     width: 200px;
+    /* largura da carta */
     height: 200px;
+    /* altura da carta */
     position: relative;
+    /* posição relativa para os filhos absolutos */
     cursor: pointer;
+    /* mouse vira mãozinha */
 }
 
-.frente, .verso {
+/* ESTILO DA FRENTE E VERSO (os dois lados da carta) */
+
+/* tanto a frente quanto o verso têm esses estilos em comum */
+.frente,
+.verso {
     position: absolute;
+    /* posição absoluta em relação à carta */
     width: 100%;
+    /* largura total da carta */
     height: 100%;
+    /* altura total da carta */
     backface-visibility: hidden;
+    /* esconde o lado de trás quando vira */
     border-radius: 15px;
+    /* borda arredondada */
     display: flex;
+    /* usa flexbox */
     align-items: center;
+    /* centraliza o conteúdo na vertical */
     justify-content: center;
-    font-size: 45px;
+    /* centraliza o conteúdo na horizontal */
     transition: transform 0.5s;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    /* animação de 0.5 segundos ao virar */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    /* sombra suave */
 }
+
+/* ESTILO DO VERSO (carta FECHADA - costa da carta) */
 
 .verso {
     background: linear-gradient(135deg, #5a3a2a, #3a2210);
+    /* degrade marrom */
     transform: rotateY(0deg);
+    /* começa virado 0 graus (mostrando) */
     border: 2px solid #c9a03d;
+    /* borda dourada */
 }
+
+/* ESTILO DA IMAGEM QUE FICA NO VERSO */
+
+.verso img {
+    width: 100%;
+    /* imagem ocupa 80% da carta */
+    height: 100%;
+    /* altura 80% da carta */
+     object-fit: cover;
+    /* mudei de contain para cover */
+    border-radius: 10px;
+    /* borda arredondada na imagem */
+}
+
+/* ESTILO DA FRENTE (carta ABERTA - mostra o personagem) */
 
 .frente {
     background: linear-gradient(135deg, #f5e6c8, #e6d5b8);
+    /* degrade pergaminho */
     transform: rotateY(180deg);
+    /* começa virada 180 graus (escondida) */
     border: 2px solid #8b4513;
+    /* borda marrom */
 }
 
+
+/* ESTILO DAS IMAGENS DOS PERSONAGENS (na frente da carta) */
+
+.img-carta {
+    width: 100%;
+    /* imagem ocupa toda largura */
+    height: 100%;
+    /* imagem ocupa toda altura */
+    object-fit: cover;    
+    /* mudei de cover para contain */
+    object-position: center;  
+    /* centraliza o ponto de corte */
+    border-radius: 12px;
+    /* borda arredondada */
+}
+
+
+/* EFECTO QUANDO A CARTA ESTÁ VIRADA */
+
+/* quando a carta tem a classe "virada", a frente aparece e o verso some */
 .carta.virada .frente {
     transform: rotateY(0deg);
+    /* frente vira para 0 graus (mostra) */
 }
 
 .carta.virada .verso {
     transform: rotateY(-180deg);
+    /* verso vira -180 graus (esconde) */
 }
 
+
+/* EFECTO QUANDO A CARTA ESTÁ CORRETA (JÁ FOI ENCONTRADA) */
+
+/* quando acerta o par, a carta fica com brilho dourado e não pode mais clicar */
 .carta.correta {
     cursor: default;
+    /* mouse vira seta normal (não mãozinha) */
     filter: drop-shadow(0 0 10px gold);
+    /* brilho dourado ao redor */
 }
 
 .carta.correta .frente {
     transform: rotateY(0deg);
+    /* frente fica sempre mostrando */
     background: linear-gradient(135deg, #90c97a, #6aab3a);
+    /* fundo verde (ganhou) */
 }
 
 .carta.correta .verso {
     transform: rotateY(-180deg);
-}
-
-.img-carta {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-@media (max-width: 600px) {
-    .carta {
-        width: 70px;
-        height: 70px;
-        font-size: 35px;
-    }
-    
-    .info {
-        font-size: 14px;
-        padding: 5px 10px;
-    }
-    
-    h1 {
-        font-size: 20px;
-    }
+    /* verso fica sempre escondido */
 }
