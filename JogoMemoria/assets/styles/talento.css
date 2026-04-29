@@ -207,7 +207,7 @@ h1 {
     /* imagem ocupa 80% da carta */
     height: 100%;
     /* altura 80% da carta */
-     object-fit: cover;
+     background-size: cover;
     /* mudei de contain para cover */
     border-radius: 10px;
     /* borda arredondada na imagem */
@@ -232,8 +232,8 @@ h1 {
     /* imagem ocupa toda largura */
     height: 100%;
     /* imagem ocupa toda altura */
-    object-fit: cover;    
-    /* mudei de cover para contain */
+    background-size: cover;    
+    /* mudei de contain para cover */
     object-position: center;  
     /* centraliza o ponto de corte */
     border-radius: 12px;

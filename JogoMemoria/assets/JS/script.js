@@ -13,8 +13,8 @@ const itens = [
     '<img src="https://i.pinimg.com/736x/60/02/74/600274465ceaf4586a91ac2e7bcfac82.jpg" class="img-carta">'
 ]
 
-// totalPares é a quantidade de personagens diferentes (6)
-// cada um vai ter um par, então no total serão 12 cartas
+// totalPares é a quantidade de personagens diferentes (10)
+// cada um vai ter um par, então no total serão 20 cartas
 // isso ajuda na hora de ver se o jogo acabou
 const totalPares = itens.length
 
