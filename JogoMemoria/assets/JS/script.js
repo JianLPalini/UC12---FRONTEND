@@ -209,7 +209,7 @@ function fimDeJogo() {
 
     // espera um pouquinho (300ms) pra não atrapalhar a animação
     setTimeout(() => {
-        alert(`🏆 Você venceu! 🏆Pontos: ${pontos}Jogadas: ${jogadas} Tempo: ${tempo}s`)
+        alert(`🏆 Você venceu! 🏆Pontos: ${pontos} Jogadas: ${jogadas} Tempo: ${tempo}s`)
     }, 300)
 }
 
