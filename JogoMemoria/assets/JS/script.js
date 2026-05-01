@@ -20,7 +20,7 @@ const totalPares = itens.length
 
 // == PEGANDO OS ELEMENTOS DO HTML ==
 // aqui eu pego cada coisa da tela pra poder mudar depois
-// usei querySelector pq o professor pediu, mas é igual getElementById
+// usei querySelector, mas é igual getElementById
 const tabuleiro = document.querySelector("#tabuleiro")     // onde as cartas vão ficar
 const pontosTexto = document.querySelector("#pontos")     // mostrador de pontos
 const jogadasTexto = document.querySelector("#jogadas")   // mostrador de jogadas
@@ -34,14 +34,13 @@ let carta2 = null          // segunda carta que a pessoa clicou
 let bloqueado = false      // quando é true, não pode clicar (usado enquanto espera)
 let pontos = 0             // quantos pontos o jogador tem
 let jogadas = 0            // quantas tentativas (pares de clique) o jogador já fez
-let paresAcertados = 0     // quantos pares já foram encontrados (max 6)
+let paresAcertados = 0     // quantos pares já foram encontrados
 let tempo = 0              // segundos desde que o jogo começou
 let timer = null          // guarda o intervalo do relógio pra poder parar depois
 
 // == FUNÇÃO PARA EMBARALHAR ==
 // essa funçao bagunça as cartas misturando elas
 // o sort com random faz cada carta ir pra um lugar diferente
-// funciona mas não é o melhor embaralhamento, mas pra jogo pequeno ta bom
 function embaralhar(cartas) {
     return cartas.sort(() => Math.random() - 0.5)
 }
@@ -52,7 +51,7 @@ function criarCartas() {
     // limpa o tabuleiro pra não duplicar cartas quando reiniciar
     tabuleiro.innerHTML = ""
 
-    // duplica os itens (cada personagem aparece 2 vezes pra formar o par)
+    // duplica os itens
     // os 3 pontinhos ... são pra copiar o array, se não copiar ele mexe no original
     let cartas = [...itens, ...itens]
 
@@ -71,10 +70,10 @@ function criarCartas() {
         carta.setAttribute("data-id", index)
         carta.setAttribute("data-conteudo", conteudo)
 
-        // marca que a carta ainda não foi encontrada (ainda ta no jogo)
+        // marca que a carta ainda não foi encontrada
         carta.setAttribute("data-encontrada", "false")
 
-        // aqui dentro coloca o HTML da carta: frente com a imagem e verso com ?
+        // aqui dentro coloca o HTML da carta, frente
         carta.innerHTML = `
         <div class="frente">${conteudo}</div>
         <div class="verso"><img src="https://i.pinimg.com/1200x/7b/52/2a/7b522a5358f8658190e943db09509110.jpg" class="img-verso"></div>
@@ -91,16 +90,16 @@ function criarCartas() {
 // == FUNÇÃO QUE EXECUTA QUANDO CLICA NA CARTA ==
 // essa é a função mais importante pra jogar
 function clicarCarta(carta) {
-    // se o jogo tiver bloqueado (esperando desvirar), não faz nada
+    // se o jogo tiver bloqueado esperando desvirar, não faz nada
     if (bloqueado) return
 
-    // se a carta já foi encontrada (acertou o par), não pode clicar de novo
+    // se a carta já foi encontrada, não pode clicar de novo
     if (carta.getAttribute("data-encontrada") === "true") return
 
-    // se a carta já estiver virada, não pode clicar dnv (evita bug)
+    // se a carta já estiver virada, não pode clicar dnv
     if (carta.classList.contains("virada")) return
 
-    // vira a carta adicionando a classe virada (o CSS faz o efeito)
+    // vira a carta adicionando a classe virada
     carta.classList.add("virada")
 
     // se não tem nenhuma carta selecionada ainda
@@ -138,7 +137,7 @@ function compararCartas() {
         paresAcertados++
         pontosTexto.textContent = pontos
 
-        // marca as cartas como encontradas (não podem mais ser clicadas)
+        // marca as cartas como encontradas
         carta1.setAttribute("data-encontrada", "true")
         carta2.setAttribute("data-encontrada", "true")
 
@@ -146,24 +145,24 @@ function compararCartas() {
         carta1.classList.add("correta")
         carta2.classList.add("correta")
 
-        // limpa a seleção (carta1 e carta2 viram null dnv)
+        // limpa a seleção
         limparCartas()
 
-        // se já acertou todos os pares (no nosso caso 6), termina o jogo
+        // se já acertou todos os pares, termina o jogo
         if (paresAcertados === totalPares) {
             fimDeJogo()
         }
     } else {
-        // ERRROU! perde 1 ponto (mas não deixa ficar negativo)
+        // Errou perde 1 ponto
         pontos = Math.max(0, pontos - 1)
         pontosTexto.textContent = pontos
 
         // bloqueia o tabuleiro pra não clicar enquanto espera
         bloqueado = true
 
-        // espera 1 segundo (1000 milissegundos) e desvira as cartas
+        // espera 1 segundoe desvira as cartas
         setTimeout(() => {
-            // remove a classe virada das duas cartas (elas voltam a ficar de costas)
+            // remove a classe viradadas duas cartas
             carta1.classList.remove("virada")
             carta2.classList.remove("virada")
 
@@ -178,7 +177,7 @@ function compararCartas() {
 
 // == FUNÇÃO QUE LIMPA AS CARTAS SELECIONADAS ==
 // só reseta as variáveis carta1 e carta2 pra null
-// precisa fazer isso depois de cada tentativa (certo ou errado)
+// precisa fazer isso depois de cada tentativa
 function limparCartas() {
     carta1 = null
     carta2 = null
@@ -187,7 +186,7 @@ function limparCartas() {
 // == FUNÇÃO DO CRONÔMETRO ==
 // começa a contar os segundos desde que o jogo iniciou
 function iniciarTimer() {
-    // se já tiver um timer rodando, para ele primeiro (evita ter dois ao mesmo tempo)
+    // se já tiver um timer rodando, para ele primeiro
     clearInterval(timer)
 
     // começa do zero
@@ -198,7 +197,7 @@ function iniciarTimer() {
     timer = setInterval(() => {
         tempo++;  // aumenta 1 segundo
         tempoTexto.textContent = tempo
-    }, 1000);  // 1000 milissegundos = 1 segundo
+    }, 1000);  // 1 segund
 }
 
 // == FUNÇÃO CHAMADA QUANDO O JOGO ACABA ==
@@ -207,7 +206,7 @@ function fimDeJogo() {
     // para o cronômetro
     clearInterval(timer)
 
-    // espera um pouquinho (300ms) pra não atrapalhar a animação
+    // espera um pouquinho pra não atrapalhar a animação
     setTimeout(() => {
         alert(`🏆 Você venceu! 🏆Pontos: ${pontos} Jogadas: ${jogadas} Tempo: ${tempo}s`)
     }, 300)
@@ -231,7 +230,7 @@ function reiniciarJogo() {
     pontosTexto.textContent = pontos
     jogadasTexto.textContent = jogadas
 
-    // recria as cartas (já vem embaralhadas de novo)
+    // recria as cartas
     criarCartas()
 
     // começa o timer do zero

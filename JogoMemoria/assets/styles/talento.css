@@ -11,7 +11,7 @@
     /* faz a largura contar incluindo bordas e padding */
 }
 
-/* ESTILO DO CORPO DA PÁGINA (body) */
+/* ESTILO DO CORPO DA PÁGINA */
 
 /* aqui é onde tudo vai dentro, é o fundo da página */
 body {
@@ -44,7 +44,7 @@ body {
     /* tirei o background, box-shadow e border */
 }
 
-/* ESTILO DO TÍTULO (h1) */
+/* ESTILO DO TÍTULO */
 
 h1 {
     text-align: center;
@@ -112,7 +112,7 @@ h1 {
     border: none;
     /* tira a borda padrão */
     border-radius: 25px;
-    /* borda bem arredondada (efeito pílula) */
+    /* borda bem arredondada */
     cursor: pointer;
     /* o mouse vira uma mãozinha */
     transition: all 0.3s;
@@ -123,7 +123,7 @@ h1 {
     /* letra estilo máquina */
 }
 
-/* EFEITO DO BOTÃO QUANDO PASSA O MOUSE POR CIMA (hover) */
+/* EFEITO DO BOTÃO QUANDO PASSA O MOUSE POR CIMA */
 
 #btnReiniciar:hover {
     background: #2c1810;
@@ -149,7 +149,7 @@ h1 {
     /* dá profundidade pro efeito 3D de virar */
 }
 
-/* ESTILO DA CARTA (cada carta individual) */
+/* ESTILO DA CARTA cada carta*/
 
 .carta {
     width: 200px;
@@ -162,7 +162,7 @@ h1 {
     /* mouse vira mãozinha */
 }
 
-/* ESTILO DA FRENTE E VERSO (os dois lados da carta) */
+/* ESTILO DA FRENTE E VERSO */
 
 /* tanto a frente quanto o verso têm esses estilos em comum */
 .frente,
@@ -189,7 +189,7 @@ h1 {
     /* sombra suave */
 }
 
-/* ESTILO DO VERSO (carta FECHADA - costa da carta) */
+/* ESTILO DO VERSO */
 
 .verso {
     background: linear-gradient(135deg, #5a3a2a, #3a2210);
@@ -204,9 +204,9 @@ h1 {
 
 .verso img {
     width: 100%;
-    /* imagem ocupa 80% da carta */
+    /* imagem ocupa 100% da carta */
     height: 100%;
-    /* altura 80% da carta */
+    /* altura 100% da carta */
      background-size: cover;
     /* mudei de contain para cover */
     border-radius: 10px;
@@ -225,7 +225,7 @@ h1 {
 }
 
 
-/* ESTILO DAS IMAGENS DOS PERSONAGENS (na frente da carta) */
+/* ESTILO DAS IMAGENS DOS PERSONAGENS */
 
 .img-carta {
     width: 100%;
@@ -255,12 +255,12 @@ h1 {
 }
 
 
-/* EFECTO QUANDO A CARTA ESTÁ CORRETA (JÁ FOI ENCONTRADA) */
+/* EFEiTO QUANDO A CARTA ESTÁ CORRETA */
 
 /* quando acerta o par, a carta fica com brilho dourado e não pode mais clicar */
 .carta.correta {
     cursor: default;
-    /* mouse vira seta normal (não mãozinha) */
+    /* mouse vira seta normal */
     filter: drop-shadow(0 0 10px gold);
     /* brilho dourado ao redor */
 }
