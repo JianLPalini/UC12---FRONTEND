@@ -15,12 +15,10 @@ const itens = [
 
 // totalPares é a quantidade de personagens diferentes (10)
 // cada um vai ter um par, então no total serão 20 cartas
-// isso ajuda na hora de ver se o jogo acabou
 const totalPares = itens.length
 
 // == PEGANDO OS ELEMENTOS DO HTML ==
 // aqui eu pego cada coisa da tela pra poder mudar depois
-// usei querySelector pq o professor pediu, mas é igual getElementById
 const tabuleiro = document.querySelector("#tabuleiro")     // onde as cartas vão ficar
 const pontosTexto = document.querySelector("#pontos")     // mostrador de pontos
 const jogadasTexto = document.querySelector("#jogadas")   // mostrador de jogadas
