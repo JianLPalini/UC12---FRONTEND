@@ -1,3 +1,7 @@
+/* RESET BÁSICO - tira as margens e espaços padrão */
+
+/* todo asterisco * significa "todos os elementos da página" */
+/* isso aqui é pra não ter espaçamentos estranhos que o navegador coloca sozinho */
 * {
     margin: 0;
     /* tira a margem externa */
@@ -7,11 +11,8 @@
     /* faz a largura contar incluindo bordas e padding */
 }
 
-<<<<<<< HEAD
-=======
 /* ESTILO DO CORPO DA PÁGINA */
 
->>>>>>> 8c7a693e8782e13a08bb8e7b7aa503334436db4f
 /* aqui é onde tudo vai dentro, é o fundo da página */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
