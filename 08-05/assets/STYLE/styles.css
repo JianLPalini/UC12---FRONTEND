@@ -1,0 +1,89 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    position: sticky;
+    top: 0;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+
+}
+
+.container-menu{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.container-menu nav a{
+    color: aliceblue;
+    text-decoration: none;
+}
+
+.container-menu nav a:hover{
+    color: darkorange;
+}
+
+.menu-extra{
+    position: relative;
+}
+
+.menu-dropdown{
+    position: absolute;
+    display: none;
+    top: 20px;
+    right: 0px;
+    background-color: rgb(0, 0, 0);
+    width: 150px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.menu-extra:hover .menu-dropdown{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-items: center;
+}
+
+.menu-dropdown a{
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+}
+
+.menu-dropdown a:hover{
+    background-color: gold;
+}
+
+.logo{
+    width: 100px;
+}
+
+.whats-btn{
+    width: 60px;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+}
+
+.cart-container{
+    background-color: pink;
+    position: relative;
+}
+
+.cart-container span{
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    font-size: 8px;
+    border-radius: 50%;
+    padding: 0.5px 3px;
+    color: white;
+}
